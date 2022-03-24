@@ -136,6 +136,7 @@ function draw(gl, objs)
 }
 
 
+//Se crea la funcion para calcular los puntos medios
 function puntoMedio(a,b){
     let coordenadas=[]
     const x= (a[0] + b[0])/2;
@@ -148,6 +149,7 @@ function puntoMedio(a,b){
     return coordenadas
 }
 
+//Se crea la funcion sierpinski para poder realizar la piramide usando recursividad
 function sierpinski(a,b,c,subdivisiones,vertices){
 
     if(subdivisiones <=1){
@@ -172,14 +174,20 @@ function createPyramid(gl, translation, rotationAxis)
     let vertices = [];
     let subdivisiones=3.0
 
+    //Se crean 4 para poder crear la piramide
     sierpinski([1,0,0],[-1,0,-1],[-1,0,1],subdivisiones,vertices);
     sierpinski([1,0,0],[0,1,0],[-1,0,-1],subdivisiones,vertices);
     sierpinski([-1,0,-1],[-1,0,1],[0,1,0],subdivisiones,vertices);
     sierpinski([-1,0,1],[1,0,0],[0,1,0],subdivisiones,vertices);
 
+
     let vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    
+    
+
+    //Creamos la funcion para crear colores aleatoriamente
     
     let Colores=[];
 
@@ -206,6 +214,7 @@ function createPyramid(gl, translation, rotationAxis)
     // Color data
     let faceVertex=[]
 
+    
     let k=0;
     while(k<36){
         faceVertex[k]=3;
